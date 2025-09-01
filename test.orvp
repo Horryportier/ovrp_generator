@@ -1,0 +1,28 @@
+# comment 
+# SETUP: - Global setup
+# input (def: panic) - path to palette (maybe even array of input)
+# gen (def: PALETTE)- enum [PALETTE|INDEXED|BOTH]
+# PALETTE - creates palette
+# INDEXED - creates indexed palete (indexed= first column filled with red color coresponding to row (255 max))
+# BOTH - dose both
+# out (def: ovr_palette.png) - output path 
+# out_size (def: 32, 256) - size of output texture (indexed always one widther) 
+# change_amount (def: 10) - used to change value on x axis if not secified in row settings
+# ------ 
+# Every line thats not starting with # or SETUP: is an ROW
+# ROW: 
+# type (def: BRIGHTEN)- color modifier enum [BRIGHTEN|DARKEN|GRADIENT|SOLID]
+# SOLID - whole row in solid color
+# BRIGHTEN - brightenss in corespondence of pattern or global amount
+# DARKEN - darkens in corespondence of pattern or global amount
+# GRADIENT - lerps between two colors
+# index (def: {0, 0}) - ethier one or two indexes pointing to pallet pixels (only GRADIENT setting uses second index)
+# y - y offset on texture dose nothing if not valid range
+# pattern - patter that repeats over x axis and subtracts or adds value ex. $pattern=5,0,0,0,5,5,5,5
+
+SETUP: $input=/home/horry/Pictures/Pallets/apollo-1x.png $gen_files=PALETTE $out=%s_ovr.png $out_size=32,256 $change_amount=5
+
+$type=SOLID $index=1 $y=10
+$type=BRIGHTEN $index=4 $ y=4 $pattern=20,5,0,5,0
+$type=DARKEN $index=4 $ y=5 $pattern=20,10,0,0,0,5
+$type=GRADIENT $index=4,8 $ y=15
